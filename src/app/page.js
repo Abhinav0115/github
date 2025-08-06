@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Axios from "axios";
 import { toast } from "react-toastify";
-import { Button, Input, CircularProgress } from "@mui/material";
+import {Input, CircularProgress } from "@mui/material";
 import UserCard from "@/components/userCard";
 import Repo from "@/components/Repo";
 
