@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import {
     GitHub,
@@ -7,20 +8,35 @@ import {
     KeyboardArrowUp,
     Code,
     Favorite,
+    Accessibility,
     Home,
     Search,
 } from "@mui/icons-material";
-import { FaReact } from "react-icons/fa";
+import { FaReact, FaNodeJs } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiVercel, SiMui } from "react-icons/si";
+import { useAccessibility } from "@/utils/Accessibility/AccessibilityProvider";
+import AccessibilityPanel from "@/utils/Accessibility/AccessibilityPanel";
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
+    const [showAccessibilityPanel, setShowAccessibilityPanel] = useState(false);
+    const { announce } = useAccessibility();
 
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
             behavior: "smooth",
         });
+    };
+
+    const toggleAccessibilityPanel = () => {
+        setShowAccessibilityPanel(!showAccessibilityPanel);
+        announce(
+            showAccessibilityPanel
+                ? "Accessibility panel closed"
+                : "Accessibility panel opened",
+            "polite"
+        );
     };
 
     return (
@@ -95,7 +111,17 @@ const Footer = () => {
                                     Favorites
                                 </Link>
                             </li>
-                            
+                            <li>
+                                <button
+                                    onClick={toggleAccessibilityPanel}
+                                    className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-sm flex items-center"
+                                    title="Accessibility Settings"
+                                    aria-label="Open accessibility settings"
+                                >
+                                    <Accessibility className="h-4 w-4 mr-1" />
+                                    Accessibility
+                                </button>
+                            </li>
                         </ul>
                     </div>
 
@@ -184,6 +210,11 @@ const Footer = () => {
                 </div>
             </div>
 
+            {/* Accessibility Panel */}
+            <AccessibilityPanel
+                isOpen={showAccessibilityPanel}
+                onClose={() => setShowAccessibilityPanel(false)}
+            />
         </footer>
     );
 };
