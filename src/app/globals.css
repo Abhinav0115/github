@@ -1,3 +1,169 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Screen Reader Only utility class */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
+/* Enhanced focus styles for accessibility */
+[data-focus-visible="true"] *:focus {
+    outline: 3px solid #3b82f6 !important;
+    outline-offset: 2px !important;
+    border-radius: 4px;
+}
+
+/* High contrast mode */
+[data-high-contrast="true"] {
+    filter: contrast(200%) !important;
+}
+
+[data-high-contrast="true"] .text-gray-500,
+[data-high-contrast="true"] .text-gray-400,
+[data-high-contrast="true"] .text-gray-600 {
+    color: #000000 !important;
+}
+
+[data-high-contrast="true"] .dark .text-gray-500,
+[data-high-contrast="true"] .dark .text-gray-400,
+[data-high-contrast="true"] .dark .text-gray-600 {
+    color: #ffffff !important;
+}
+
+/* Reduced motion preferences */
+[data-reduced-motion="true"] * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+}
+
+/* Font size adjustments */
+[data-font-size="small"] {
+    font-size: 14px !important;
+}
+
+[data-font-size="large"] {
+    font-size: 18px !important;
+}
+
+[data-font-size="extra-large"] {
+    font-size: 20px !important;
+}
+
+/* Skip link styles */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #3b82f6;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 9999;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Enhanced button and interactive element styles */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Improved hover states for touch devices */
+@media (hover: hover) {
+    .hover\:scale-105:hover {
+        transform: scale(1.05);
+    }
+
+    .hover\:shadow-lg:hover {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+            0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+}
+
+/* Ensure minimum tap target size for mobile */
+@media (max-width: 768px) {
+    button,
+    a,
+    [role="button"],
+    [role="link"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Dark mode improvements */
+.dark {
+    color-scheme: dark;
+}
+
+/* Loading animation accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .animate-spin {
+        animation: none;
+    }
+
+    .animate-pulse {
+        animation: none;
+    }
+}
+
+/* Custom scrollbar for better visibility */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+    background: #374151;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 6px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #6b7280;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}

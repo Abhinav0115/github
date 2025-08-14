@@ -1,8 +1,8 @@
-# 🔍 GitHub Repository Explorer
+# 🔍 Repository Explorer
 
 A modern, responsive web application built with **Next.js** that allows users to search for GitHub users and explore their repositories in a beautiful, intuitive interface.
 
-![GitHub Repository Explorer](https://img.shields.io/badge/Next.js-14+-black?style=for-the-badge&logo=next.js)
+![Repository Explorer](https://img.shields.io/badge/Next.js-14+-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-18+-61DAFB?style=for-the-badge&logo=react)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![Material UI](https://img.shields.io/badge/Material_UI-007FFF?style=for-the-badge&logo=mui)
@@ -58,7 +58,7 @@ A modern, responsive web application built with **Next.js** that allows users to
 1. **Clone the repository**
 
     ```bash
-    git clone https://github.com/Abhinav0115/github-repo-explorer.git
+    git clone https://github.com/Abhinav0115/repo-explorer.git
     cd github-repo-explorer
     ```
 
@@ -96,7 +96,7 @@ A modern, responsive web application built with **Next.js** that allows users to
 ## 📁 Project Structure
 
 ```
-task-github/
+repo-explorer/
 ├── src/
 │   ├── app/
 │   │   ├── page.js          # Main application page
@@ -144,13 +144,6 @@ task-github/
 -   Improves performance and respects GitHub API rate limits
 -   Provides smooth user experience
 
-### Error Handling
-
--   **404 Not Found**: User doesn't exist
--   **403 Forbidden**: API rate limit exceeded
--   **Network Error**: Connection issues
--   **Generic Error**: Fallback for other issues
-
 ### Responsive Design
 
 -   Mobile-first approach
@@ -159,14 +152,6 @@ task-github/
 -   Touch-friendly interactions
 
 ## 🔧 Configuration
-
-### Environment Variables (Optional)
-
-If you want to use GitHub API with authentication for higher rate limits:
-
-```env
-NEXT_PUBLIC_GITHUB_TOKEN=your_github_personal_access_token
-```
 
 ### Tailwind CSS
 
@@ -195,14 +180,6 @@ The project uses Tailwind CSS for styling. Configuration can be found in `tailwi
 -   **Lazy loading** for better initial page load
 -   **Error boundaries** for graceful error handling
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -221,14 +198,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 -   [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
 -   [Material-UI](https://mui.com/) for the React components
 -   [React Icons](https://react-icons.github.io/react-icons/) for the beautiful icons
-
-## 📞 Support
-
-If you have any questions or need help, please:
-
-1. Check the [Issues](https://github.com/Abhinav0115/github-repo-explorer/issues) page
-2. Create a new issue if your problem isn't already reported
-3. Provide detailed information about your problem
 
 ---
 
