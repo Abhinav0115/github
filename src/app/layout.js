@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import { AccessibilityProvider } from "@/utils/Accessibility/AccessibilityProvider";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { UserStorageProvider } from "@/contexts/UserStorageContext";
 import { ToastContainer } from "react-toastify";
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className="">
+                <AccessibilityProvider>
                     <UserStorageProvider>
                         <FavoritesProvider>
                             {children}
@@ -37,6 +39,7 @@ export default function RootLayout({ children }) {
                             />
                         </FavoritesProvider>
                     </UserStorageProvider>
+                </AccessibilityProvider>
             </body>
         </html>
     );
