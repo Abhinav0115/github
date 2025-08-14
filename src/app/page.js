@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Axios from "axios";
 import { toast } from "react-toastify";
 import { Input, CircularProgress } from "@mui/material";
@@ -10,6 +10,13 @@ import UserCard from "@/components/userCard";
 import RepositoryDashboard from "@/components/Repo/RepositoryDashboard";
 import FavoritesWidget from "@/components/Favorites/FavoritesWidget";
 import RecentUsers from "@/components/RecentUsers";
+import {
+    SkipLink,
+    FocusIndicator,
+    ScrollToTop,
+    KeyboardShortcuts,
+} from "@/utils/Accessibility/AccessibilityHelpers";
+import { useAccessibility } from "@/utils/Accessibility/AccessibilityProvider";
 import { useUserStorage } from "@/contexts/UserStorageContext";
 
 export default function Home() {
@@ -18,6 +25,7 @@ export default function Home() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [debouncedQuery, setDebouncedQuery] = useState("");
+    const { announce, settings } = useAccessibility();
 
     // User storage context
     const {
@@ -44,6 +52,7 @@ export default function Home() {
         const trimmedUsername = username.trim();
         setLoading(true);
         setError(null);
+        announce(`Searching for user ${trimmedUsername}`, "polite");
 
         try {
             // Check if user is cached and valid
@@ -57,6 +66,10 @@ export default function Home() {
                 toast.success(`User ${cachedUser.login} fetched!`, {
                     icon: "⚡",
                 });
+                announce(
+                    `Found user ${cachedUser.login}. ${cachedUser.public_repos} repositories available.`,
+                    "polite"
+                );
                 addSearchHistory(trimmedUsername, true);
                 return;
             }
@@ -72,7 +85,10 @@ export default function Home() {
             addSearchHistory(trimmedUsername, true);
 
             toast.success(`User ${data.login} fetched successfully!`);
-            
+            announce(
+                `Found user ${data.login}. ${data.public_repos} repositories available.`,
+                "polite"
+            );
         } catch (error) {
             console.error("Error fetching user:", error);
 
@@ -91,6 +107,7 @@ export default function Home() {
             setError(errorMessage);
             setUser(null);
             toast.error(errorMessage);
+            announce(`Error: ${errorMessage}`, "assertive");
         } finally {
             setLoading(false);
         }
@@ -122,6 +139,12 @@ export default function Home() {
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
             {/* Skip Links */}
+            <SkipLink href="#main-content">Skip to main content</SkipLink>
+            <SkipLink href="#search-input">Skip to search</SkipLink>
+
+            {/* Focus and Accessibility Indicators */}
+            <FocusIndicator />
+            <KeyboardShortcuts />
 
             <Navbar />
             <main id="main-content" tabIndex="-1" className="outline-none">
@@ -346,6 +369,9 @@ export default function Home() {
                         )}
                 </div>
             </main>
+
+            {/* Accessibility Helpers */}
+            <ScrollToTop />
 
             <Footer />
         </div>

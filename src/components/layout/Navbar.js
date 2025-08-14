@@ -11,11 +11,13 @@ import {
     LightMode,
     Favorite,
 } from "@mui/icons-material";
+import { useAccessibility } from "@/utils/Accessibility/AccessibilityProvider";
 import { useFavorites } from "@/contexts/FavoritesContext";
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
+    const { announce } = useAccessibility();
     const { getFavoritesCount } = useFavorites();
 
     // Load theme from localStorage on component mount
@@ -36,6 +38,10 @@ const Navbar = () => {
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
+        announce(
+            isMobileMenuOpen ? "Mobile menu closed" : "Mobile menu opened",
+            "polite"
+        );
     };
 
     const toggleTheme = () => {
@@ -45,9 +51,11 @@ const Navbar = () => {
         if (newTheme) {
             document.documentElement.classList.add("dark");
             localStorage.setItem("theme", "dark");
+            announce("Switched to dark mode", "polite");
         } else {
             document.documentElement.classList.remove("dark");
             localStorage.setItem("theme", "light");
+            announce("Switched to light mode", "polite");
         }
     };
 
